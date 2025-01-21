@@ -12,7 +12,7 @@ Popular Categories
 <div class="card card-solid">
   <div class="card-body pb-0">
     <div class="row d-flex align-items-stretch">
-      @if($categories->empty())
+      @if($categories->isEmpty())
       <p> there is no categories</p>
       @endif
       @foreach($categories as $category)
@@ -23,7 +23,7 @@ Popular Categories
               <div class="col-7">
                 <h3 class="lead">{{$category->name}}</h3>
                 @foreach($category->chaild as $chaild)
-                <a href="#" class="btn btn-outline-secondary">{{$chaild->name}}</a>
+                <a href="{{route('show-products',$chaild->id)}}" class="btn btn-outline-secondary">{{$chaild->name}}</a>
                 <style>
                   a:hover {
                     text-decoration: underline;
@@ -35,7 +35,7 @@ Popular Categories
                 
                 @endforeach
 
-                <a class="link-dark"> Everything is presented in this section </a>
+                <a href="{{route('show-all-products',$category->id)}}" class="link-dark"> Everything is presented in this section </a>
               </div>
               <div class="col-5 text-center">
                 <img src="{{asset('assets/system-image/'.$category->name.'.jpg')}}" alt="" class="img-circle img-fluid">
@@ -49,6 +49,7 @@ Popular Categories
 
   </div>
 </div>
+                  {{$categories->links()}}
 </div>
 
 @endsection

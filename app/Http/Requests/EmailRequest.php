@@ -25,7 +25,7 @@ class EmailRequest extends FormRequest
     {
         return [
             'name'=>['required','max:255'],
-            'phone'=>['required','min:11','numeric'],
+            'phone'=>['required','min:11','numeric','unique:users,phone'],
             'email'=>['required','max:255','unique:users,email'],
             'password'=>['required','min:8','max:16',],
         ];

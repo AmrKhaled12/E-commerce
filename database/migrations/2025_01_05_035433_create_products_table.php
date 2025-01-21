@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable(false);
             $table->string('description')->nullable();
-            $table->string('image')->nullable();
-            $table->string('adress')->nullable();
+            $table->string('address')->nullable();
             $table->string('price')->nullable()->default('free');
             $table->foreignId('user_id')->nullable(false)->constrained('users','id')
             ->cascadeOnDelete()

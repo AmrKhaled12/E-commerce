@@ -1,17 +1,15 @@
 <?php
 
-use App\Http\Controllers\crud\AuthController;
+use App\Http\Controllers\auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('auth.login');
-})->name('show-login');
-Route::get('/registration', function () {
-    return view('auth.register');
-})->name('show-register');
 
-Route::group(['prefix'=>'auth','middelware'=>''],function(){
-    Route::post('/dashboard',[AuthController::class,'login'])->name('login');
+Route::get('/auth/logout',[AuthController::class,'logout'])->name('logout')->middleware('auth');
+
+Route::group(['prefix'=>'auth','middleware'=>'guest'],function(){
+    Route::get('/registration',[AuthController::class,'showRegister'])->name('show-register');
+    Route::get('/login',[AuthController::class,'showLogin'])->name('login');
+    Route::post('/dashboard',[AuthController::class,'login'])->name('post-login');
     Route::post('/register',[AuthController::class,'register'])->name('register');
-    Route::get('/logout',[AuthController::class,'logout']);
+    
 });

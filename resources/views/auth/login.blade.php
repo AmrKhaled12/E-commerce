@@ -13,7 +13,7 @@
                             {{ Session::get('error')}}
                             </div>
                         @endif
-                        <form id="registrationForm" action="{{route('login')}}" method="post">
+                        <form id="registrationForm" action="{{route('post-login')}}" method="post">
                             @csrf
                             @error('email')
                             <div class="alert alert-danger" role="alert">

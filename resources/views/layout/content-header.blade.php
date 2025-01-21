@@ -6,7 +6,11 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              @if(Auth::check())
+              <li class="breadcrumb-item"><a href="{{route('logout')}}">Logout</a></li>
+              @else
+              <li class="breadcrumb-item"><a href="{{route('login')}}">Sign in</a></li>
+              @endif
               <li class="breadcrumb-item active">@yield('title')</li>
             </ol>
           </div><!-- /.col -->
