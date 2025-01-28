@@ -12,23 +12,21 @@ use Illuminate\Support\Facades\DB as FacadesDB;
 class AdController extends Controller
 {
     protected $product;
+
     public function __construct(ProductService $product)
     {
-        $this->product=$product;
+        $this->product = $product;
     }
 
-   public function PostAd(AdRequest $request){
+    public function PostAd(AdRequest $request)
+    {
 
-    $this->product->CreateProduct($request->validated());
-    
-        $productId=DB::table('products')->select('id')
-                    ->where('user_id','=',session('userdata')['id'])
-                    ->where('chaild_category_id','=',$request->chaild)->get();
-        $productId=($productId[$productId->count()-1])->id;
+        $this->product->CreateProduct($request->validated());
+        $productId = $this->product->getProductId($request->chaild);
         if ($request->hasFile('images')) {
-            $this->product->SaveImages($request->images,$productId);
-            
+            $this->product->SaveImages($request->images, $productId);
         }
-       
-   }
+
+        return redirect()->route('show-dashboard');
+    }
 }

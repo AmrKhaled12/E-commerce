@@ -5,8 +5,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 class UserService
 {
-
-
     public static function CreateUser(array $data){
         DB::table('users')->insert([
             'name'     =>     $data['name'],

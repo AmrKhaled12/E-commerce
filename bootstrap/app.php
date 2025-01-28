@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\JwtMiddleware;
 use App\Http\Middleware\UserType;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,9 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->group(base_path('routes/api.php'));
         },
     )
+    
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'type'=>UserType::class,
+            'jwt-token' =>JwtMiddleware::class,
         ]);
     
         

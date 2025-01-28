@@ -4,7 +4,7 @@
         <img src="{{asset('assets/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
            
-        <span class="brand-text font-weight-light">{{isset($user['name']) ? $user['name']:'user'}}</span>
+        <span class="brand-text font-weight-light">{{Auth::check() ? Auth::user()->name : 'user' }}</span>
               
       </a>
       

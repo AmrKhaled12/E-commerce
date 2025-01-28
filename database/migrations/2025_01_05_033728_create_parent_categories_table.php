@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('parent_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false)->unique();
+            $table->string('image',255)->nullable();
+            $table->foreignId('user_id')
+            ->nullable()
+            ->constrained('users','id')
+            ->cascadeOnDelete()
+            ->cascadeOnUpdate();
         });
     }
 

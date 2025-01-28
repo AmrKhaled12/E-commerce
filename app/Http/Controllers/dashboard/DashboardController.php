@@ -9,12 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\JoinClause;
+use App\Classes\showCategory;
+
 class DashboardController extends Controller
 {
     public function showDashboard() {
-        $user=session('userdata');
-        $categories=ParentCategory::with('chaild')->simplePaginate(6);
-        return view('dashboard.user')->with(['categories'=>$categories,'user'=>$user]);
+        $categories=showCategory::DashboardCategories();
+        return view('dashboard.user')->with(['categories'=>$categories,]);
         
     }
 

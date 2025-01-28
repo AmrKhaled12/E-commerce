@@ -47,6 +47,9 @@ class AuthController extends Controller
     }
 
     public function logout(){
+        session_start();
+        session_unset();
+        session_destroy();
         session()->flush();
         Auth::logout();
         return redirect()->route('login');
