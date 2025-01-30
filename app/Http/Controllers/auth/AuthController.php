@@ -31,10 +31,10 @@ class AuthController extends Controller
 
        return redirect()->route('login')->with('error', 'The Email Or Password Is Incorrect !!!');     
    }
-    $user=new GenerateUser();
-    $user->GenerateUserData();
-    $userData=$user->GetUserData();
-    session(['userdata'=>$userData]);
+    // $user=new GenerateUser();
+    // $user->GenerateUserData();
+    // $userData=$user->GetUserData();
+    // session(['userdata'=>$userData]);
     return redirect()->route('show-dashboard');
     
     }

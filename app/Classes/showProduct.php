@@ -39,4 +39,10 @@ class showProduct
             ->where('chaild_category_id', '=', $chaildCategoryId)
             ->simplePaginate(15);
     }
+
+    public static function showItem($productId){
+        return Product::with(['images', 'user:id,name', 'chaild:id,name'])
+        ->where('id', $productId)
+        ->first();
+    }
 }

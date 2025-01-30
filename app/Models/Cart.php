@@ -14,13 +14,14 @@ class Cart extends Model
         'id',
         'quantity'
     ];
+    public $timestamps=false;
 
     public function user(){
         return $this->belongsTo(User::class,'user_id');
     }
 
     public function product(){
-        return $this->hasMany(Product::class,'product_id');
+        return $this->belongsTo(Product::class,'product_id');
     }
 
 }

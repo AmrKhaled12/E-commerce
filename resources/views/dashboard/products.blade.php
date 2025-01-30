@@ -9,11 +9,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 @endpush
 @push('script')
-<script src="js/jquery-1.11.0.min.js"></script>
+<script src="{{asset('assets/product/js/jquery-1.11.0.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-<script src="js/plugins.js"></script>
-<script src="js/script.js"></script>
+<script src="{{asset('assets/product/js/plugins.js')}}"></script>
+<script src="{{asset('assets/product/js/script.js')}}"></script>
 @endpush
 @section('title')
 products
@@ -41,11 +41,11 @@ products
                         </svg></a>
                     <figure>
                     @if($product->images->count() > 0)
-                        <a href="index.html" title="Product Title">
+                        <a href="{{route('show-item',$product->id)}}" title="Product Title">
                             <img src="{{asset('storage/images/'.$product->images[0]->path)}}" class="tab-image">
                         </a>
                         @else
-                        <a href="index.html" title="Product Title">
+                        <a href="{{route('show-item',$product->id)}}" title="Product Title">
                             <img src="{{asset('storage/default.jpg')}}" class="tab-image">
                         </a>
                         @endif
@@ -55,6 +55,8 @@ products
                             <use xlink:href="#star-solid"></use>
                         </svg> 4.5</span>
                     <span class="price">${{$product->price}}</span>
+                    <form action="{{route('add-to-cart')}}" method="post">
+                        @csrf
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="input-group product-qty">
                             <span class="input-group-btn">
@@ -65,6 +67,7 @@ products
                                 </button>
                             </span>
                             <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
+                            <input type="number" hidden name="product_id" value="{{$product->id}}">
                             <span class="input-group-btn">
                                 <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus">
                                     <svg width="16" height="16">
@@ -73,8 +76,9 @@ products
                                 </button>
                             </span>
                         </div>
-                        <a href="#" class="nav-link">Add to Cart <iconify-icon icon="uil:shopping-cart"></a>
+                        <button type="submit" class="nav-link">Add to Cart <iconify-icon icon="uil:shopping-cart"></a>
                     </div>
+                    </form>
                 </div>
             </div>
 

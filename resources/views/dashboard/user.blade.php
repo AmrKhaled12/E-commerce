@@ -38,7 +38,7 @@ Popular Categories
                 <a href="{{route('show-all-products',$category->id)}}" class="link-dark"> Everything is presented in this section </a>
               </div>
               <div class="col-5 text-center">
-                <img src="{{asset('assets/system-image/'.$category->name.'.jpg')}}" alt="" class="img-circle img-fluid">
+                <img src="{{asset('storage/images/category/system-image/'.$category->name.'.jpg')}}" alt="" class="img-circle img-fluid">
               </div>
             </div>
           </div>

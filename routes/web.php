@@ -5,9 +5,15 @@ use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\ProductController;
-
+use App\Http\Controllers\dashboard\CartController;
 
 Route::get('/',[DashboardController::class,'showDashboard'])->name('show-dashboard');
+Route::get('/index',function(){
+ return view('dashboard.item');
+});
+
+
+
 Route::group(['prefix'=>'/dashboard','middleware'=>'auth'],function(){
     Route::get('/fillterion',[DashboardController::class,'GetFillterationCategories'])->name('fillteration');
     Route::get('/Ad/{id}',[DashboardController::class,'ShowAdForm'])->name('show-AdCard');
@@ -17,6 +23,10 @@ Route::group(['prefix'=>'/dashboard','middleware'=>'auth'],function(){
     Route::get('/myproducts',[ProductController::class,'showUserProducts'])->name('my-ads');
     Route::get('/Category-form',[CategoryController::class,'showCategoryForm'])->name('show-category-form');
     Route::post('/category',[CategoryController::class,'createCategory'])->name('create-category');
+    Route::post('/added',[CartController::class,'storeToCart'])->name('add-to-cart');
+    Route::get('/cart',[CartController::class,'showCart'])->name('show-cart');
+    Route::get('/cart/updated/{id}',[CartController::class,'deleteItem'])->name('delete-item');
+    Route::get('item/{id}',[ProductController::class,'showItem'])->name('show-item');
 });
 
 require __DIR__.'/auth.php';
