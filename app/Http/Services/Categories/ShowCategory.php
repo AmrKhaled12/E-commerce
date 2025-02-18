@@ -1,11 +1,11 @@
 <?php
-namespace App\Classes;
+namespace App\Http\Services\Categories;
 
 use App\Models\ParentCategory;
 
-class showCategory {
+class ShowCategory {
 
-    public static function DashboardCategories(){
+    public function DashboardCategories(){
         return ParentCategory::with('chaild')->simplePaginate(6);
     }
 

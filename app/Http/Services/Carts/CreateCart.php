@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes\Cart;
+namespace App\Http\Services\Carts;
 
 use App\Models\Cart;
 use App\Models\Product;
@@ -9,11 +9,9 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-use function Laravel\Prompts\select;
-use function Laravel\Prompts\table;
-
 class CreateCart implements CartRepository
 {
+    protected $total = 0;
 
     public function get()
     {
@@ -48,7 +46,9 @@ class CreateCart implements CartRepository
                 'cookie_id' => $cookie_id,
             ]);
         }
+        else{
         return $items->increment('quantity', $quantity);
+        }
     }
 
     public function update(Product $product, $quantity)
@@ -84,9 +84,11 @@ class CreateCart implements CartRepository
 
     public function total()
     {
-        return DB::table('carts')
+      $this->total= DB::table('carts')
             ->join('products', 'products.id', '=', 'carts.product_id')
             ->selectRaw('SUM(products.price * carts.quantity) as total')
+            ->where('cookie_id', '=', $this->getCookieId())
             ->value('total');
+            return $this->total;
     }
 }

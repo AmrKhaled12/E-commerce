@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes;
+namespace App\Http\Services\Products;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
@@ -44,6 +44,4 @@ class ProductService
             ]);
         }
     }
-
-    
 }

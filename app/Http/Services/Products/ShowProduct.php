@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Classes;
+namespace App\Http\Services\Products;
+
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
-class showProduct
+class ShowProduct
 {
-    public static function UserProduct()
+    public function UserProduct()
     {
         return Product::with(['images' => function ($q) {
             $q->select('product_id', 'path')->limit(1);
@@ -17,7 +18,7 @@ class showProduct
     }
 
 
-    public static function productsForMainCategory($chaildCategoriesIds)
+    public function productsForMainCategory($chaildCategoriesIds)
     {
 
         return Product::with(['images' => function ($q) {
@@ -29,7 +30,7 @@ class showProduct
             ->simplePaginate(15);
     }
 
-    public static function productsForSubCategory($chaildCategoryId)
+    public function productsForSubCategory($chaildCategoryId)
     {
         return Product::with(['images' => function ($q) {
             $q->select('product_id', 'path')->limit(1);
@@ -40,9 +41,10 @@ class showProduct
             ->simplePaginate(15);
     }
 
-    public static function showItem($productId){
+    public function showItem($productId)
+    {
         return Product::with(['images', 'user:id,name', 'chaild:id,name'])
-        ->where('id', $productId)
-        ->first();
+            ->where('id', $productId)
+            ->first();
     }
 }

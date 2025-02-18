@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('title')
-one Item
+Item
 @endsection
 @section('content')
 <section class="item-details section">
@@ -11,12 +11,17 @@ one Item
                         <div class="product-images">
                             <main id="gallery">
                                 <div class="main-img">
+                                @if($product->images->count() > 0)
                                     <img src="{{asset('storage/images/'.$product->images[0]->path)}}" id="current" alt="#">
                                 </div>
                                 <div class="images">
+                                   
                                     @foreach($product->images as $image )
                                     <img src="{{asset('storage/images/'.$image->path)}}" class="img" alt="#">
                                     @endforeach
+                                    @else
+                                    <img src="{{asset('storage/default.jpg')}}" class="tab-image">
+                                    @endif
                                 </div>
                             </main>
                         </div>

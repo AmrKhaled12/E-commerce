@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\Dashboard;
 
-use App\Classes\CreateCategory;
+use App\Http\Services\Categories\CreateCategory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Models\ChaildCategory;
-use App\Models\ParentCategory;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class CategoryController extends Controller
 {

@@ -3,7 +3,7 @@
 Popular Categories
 @endsection
 @section('content')
-<form action="{{route('fillteration')}}" method="get" class=" d-flex justify-content-between mb-4">
+<form action="{{route('fillteration')}}" method="post" class=" d-flex justify-content-between mb-4" >
   @csrf
   <input type="text" name="name" class="form-control mx-2" placeholder="name">
   <button type="submit" class="btn btn-dark mx-2">Fillter</button>
@@ -24,12 +24,6 @@ Popular Categories
                 <h3 class="lead">{{$category->name}}</h3>
                 @foreach($category->chaild as $chaild)
                 <a href="{{route('show-products',$chaild->id)}}" class="btn btn-outline-secondary">{{$chaild->name}}</a>
-                <style>
-                  a:hover {
-                    text-decoration: underline;
-                    font-weight: bold;
-                  }
-                </style>
                   <br>
                   <br>
                 

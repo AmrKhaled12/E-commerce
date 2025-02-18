@@ -1,41 +1,38 @@
 <?php
 
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\Dashboard;
 
-use App\Classes\ProductService;
-use App\Classes\showProduct;
+
 use App\Http\Controllers\Controller;
 use App\Models\ChaildCategory;
-use App\Models\ParentCategory;
-use App\Models\Product;
-use App\Models\ProductImages;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Services\Products\ShowProduct;
+
 
 class ProductController extends Controller
 {
 
-    public function showProducts($id)
+    public function showProducts($id,ShowProduct $product)
     {
-        $products = showProduct::productsForSubCategory($id);
+        
+        $products = $product->productsForSubCategory($id);
         return view('dashboard.products', with(['products' => $products]));
     }
 
-    public function showCategoryProducts($id)
+    public function showCategoryProducts($id,ShowProduct $product)
     {
         $chaildIds = ChaildCategory::select('id')->where('parent_id', '=', $id)->get();
-        $products=showProduct::productsForMainCategory($chaildIds);
+        $products=$product->productsForMainCategory($chaildIds);
         return view('dashboard.products', with(['products' => $products]));
     }
 
-    public function showUserProducts()
+    public function showUserProducts(ShowProduct $product)
     {
-        $products=showProduct::UserProduct();        
+        $products=$product->UserProduct();        
         return view('dashboard.products', with(['products' => $products]));
     }
 
-    public function showItem($id){
-        $product=showProduct::showItem($id);
+    public function showItem($id,ShowProduct $product){
+        $product=$product->showItem($id);
         return view('dashboard.item',['product'=>$product]);
     }
 }

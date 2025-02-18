@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\api\category;
+namespace App\Http\Controllers\Api\Category;
 
 use App\Http\Controllers\Controller;
 use App\Models\ParentCategory;
-use Illuminate\Http\Request;
+
 
 class CategoryController extends Controller
 {
-   public function showCategory(){
-    $categories=ParentCategory::all();
-    return response()->json($categories);
+   public function showCategory()
+   {
+      $categories = ParentCategory::all();
+      return response()->json($categories);
    }
 }

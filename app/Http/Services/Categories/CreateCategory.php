@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes;
+namespace App\Http\Services\Categories;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\ParentCategory;
